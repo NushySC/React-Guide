@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Radium from 'radium'
 
 class App extends Component {
   state = {
@@ -64,6 +65,12 @@ class App extends Component {
       marginBottom: '2em',
       borderRadius: '0.5em',
 
+      //radium properties, wrap in quotes because they start ith colon
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black',
+      }
+
     }
 
     let persons = null;
@@ -82,6 +89,10 @@ class App extends Component {
         </div>
       );
           style.backgroundColor = 'blue';
+          style[':hover'] = {
+            backgroundColor: 'lightred',
+            color: 'black',
+          }
     }
 
     const classes = [];
@@ -106,4 +117,5 @@ class App extends Component {
   }
 }
 
-export default App;
+//Componetn wrapping a component
+export default Radium(App);
