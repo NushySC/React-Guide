@@ -6,7 +6,7 @@ const person = (props) => {
     //  {Math.floor(Math.random()*30)} years old</p>
     // return <p>I'm a {props.name} and I am
     //  {props.age} years old</p>
-
+ 
     //function components cannot use state
 
     return(
