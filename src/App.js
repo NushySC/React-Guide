@@ -5,10 +5,11 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      {name: "Anna", age: 29},
-      {name: "Alicia", age: 38},
-      {name: 'Ariel', age: 41}
+      { id:'1', name: "Anna", age: 29},
+      { id:'2', name: "Alicia", age: 38},
+      { id:'3', name: 'Ariel', age: 41}
     ],
+    otherState: 'whatever',
     showPersons: false,
   }
 
@@ -21,12 +22,21 @@ class App extends Component {
   //   ]})
   // }
 
-  nameChangedHandler = (event) => {
-    this.setState({persons: [
-      {name: 'Anna', age: 28},
-      {name: event.target.value, age: 89},
-      {name: 'Patricia', age: 21}
-    ]})
+  nameChangedHandler = ( event, id ) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+    // const persons = Object.assign({}, this.state.persons[personsIndex]);
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState( {persons: persons} );
   }
 
   deletePersonHandler = (personIndex) => {
@@ -34,12 +44,12 @@ class App extends Component {
     const persons = [...this.state.persons]
     //new array from same as old array but different instance. Copy and then update state.
     persons.splice(personIndex, 1);
-    this.setState( { persons: persons });
+    this.setState({persons: persons});
   }
 
-  togglePersonsHandler = () => {  
+  togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    this.setState( { showPersons: !doesShow } );
   }
 
   render() {
@@ -58,17 +68,18 @@ class App extends Component {
 
     let persons = null;
 
-    if (this.state.showPersons === true) {
+    if (this.state.showPersons) {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <Person 
-            click= {() => this.deletePersonHandler(index)}
-            //the alternative to arrow function will be to bind
-            name={person.name} 
-            age={person.age}/>
+            return <Person
+              click={() => this.deletePersonHandler(index)}
+              name={person.name} 
+              age={person.age}
+              key={person.id}
+              changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
-        </div> 
+        </div>
       )
     }
 
