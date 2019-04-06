@@ -55,7 +55,7 @@ class App extends Component {
   render() {
 
     const style = {
-      backgroundColor: 'red',
+      backgroundColor: 'green',
       font: 'Helvetica',
       color: 'white',
       border: '0.3em solid black',
@@ -80,12 +80,21 @@ class App extends Component {
               changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
         </div>
-      )
+      );
+          style.backgroundColor = 'blue';
+    }
+
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    } if (this.state.persons.lenght <= 1) {
+      classes.push('bold');
     }
 
      return (
        <div className="App">
          <h1> Hi, I am a React App</h1>
+         <p className={classes.join(' ')}>It's working!</p>
          <button 
          style={style}
          onClick={this.togglePersonsHandler}> Toggle persons</button>

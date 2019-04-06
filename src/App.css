@@ -4,10 +4,10 @@
   color: black;
 }
 
-h3 {
-  color:red;
+.red {
+  color: red;
 }
 
-p {
-  color:darkgrey;
+.bold {
+  font-weight: bold;
 }
