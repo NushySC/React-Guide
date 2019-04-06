@@ -52,18 +52,11 @@ class App extends Component {
     if (this.state.showPersons === true) {
       persons = (
         <div>
-           <Person 
-           name={this.state.persons[0].name} 
-           age={this.state.persons[0].age}
-           click={this.swithcNameHandler.bind(this,'Anuska!')}
-           />
-           <Person 
-           name={this.state.persons[1].name} 
-           age={this.state.persons[0].age}>I like to paint and origami</Person>
-           <Person 
-           name="Ariel" 
-           age="41"
-           changed={this.nameChangedHandler}/>
+          {this.state.persons.map(person => {
+            return <Person 
+            name={person.name} 
+            age={person.age}/>
+          })}
         </div> 
       )
     }
@@ -77,7 +70,7 @@ class App extends Component {
           {persons}
        </div>
      );
-     
+
     // return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'Hi, I\'m a React App'))
   }
 }
