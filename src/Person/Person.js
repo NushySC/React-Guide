@@ -1,8 +1,14 @@
 import React from 'react';
 import './Person.css';
-import Radium from 'radium'
+
+//import Radium from 'radium'
 
 const person = ( props ) => {
+    //    const style = {
+    //        '@media (min-width: 500px)': {
+    //            width: '450px'
+    //        }
+    //    }
     // return <p>I'm a {props.name} and I am
     //  {Math.floor(Math.random()*30)} years old</p>
     // return <p>I'm a {props.name} and I am
@@ -18,4 +24,4 @@ return (
         )
     };
     
-    export default Radium(person);
+    export default person;

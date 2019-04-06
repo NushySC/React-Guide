@@ -10,3 +10,9 @@
     text-align: center;
     background-color: #e9e8e8;
 }
+
+/* @media (min-width: 500px) {
+    .Person {
+        width: 450px;
+    }
+} */

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+//import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
-import Radium from 'radium'
 
 class App extends Component {
   state = {
@@ -100,17 +100,18 @@ class App extends Component {
       classes.push('red');
     } if (this.state.persons.lenght <= 1) {
       classes.push('bold');
-    }
+    };
 
      return (
-       <div className="App">
-         <h1> Hi, I am a React App</h1>
-         <p className={classes.join(' ')}>It's working!</p>
-         <button 
-         style={style}
-         onClick={this.togglePersonsHandler}> Toggle persons</button>
-          {persons}
-       </div>
+
+         <div className="App">
+           <h1> Hi, I am a React App</h1>
+           <p className={classes.join(' ')}>It's working!</p>
+           <button 
+           style={style}
+           onClick={this.togglePersonsHandler}> Toggle persons</button>
+            {persons}
+         </div>
      );
 
     // return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'Hi, I\'m a React App'))
@@ -118,4 +119,4 @@ class App extends Component {
 }
 
 //Componetn wrapping a component
-export default Radium(App);
+export default App;
