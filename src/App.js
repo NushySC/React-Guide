@@ -46,16 +46,12 @@ class App extends Component {
       marginBottom: '2em',
 
     }
-     return (
-       <div className="App">
-         <h1> Hi, I am a React App</h1>
-         <button 
-         style={style}
-         onClick={this.togglePersonsHandler}> Switch person</button>
 
-{this.state.showPersons === true ? 
-//React.createElement()
-<div>
+    let persons = null;
+
+    if (this.state.showPersons === true) {
+      persons = (
+        <div>
            <Person 
            name={this.state.persons[0].name} 
            age={this.state.persons[0].age}
@@ -68,10 +64,20 @@ class App extends Component {
            name="Ariel" 
            age="41"
            changed={this.nameChangedHandler}/>
-</div> : null 
-}
+        </div> 
+      )
+    }
+
+     return (
+       <div className="App">
+         <h1> Hi, I am a React App</h1>
+         <button 
+         style={style}
+         onClick={this.togglePersonsHandler}> Toggle persons</button>
+          {persons}
        </div>
      );
+     
     // return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'Hi, I\'m a React App'))
   }
 }
