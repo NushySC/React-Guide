@@ -6,7 +6,7 @@ class App extends Component {
   state = {
     persons: [
       {name: "Anna", age: 29},
-      {name: "Alicia", age: 28},
+      {name: "Alicia", age: 38},
       {name: 'Ariel', age: 41}
     ]
   }
@@ -16,6 +16,14 @@ class App extends Component {
     //Don't change te state directly, se setStatethis.state.persons[0].name = "Maximilian";
     this.setState({persons: [
       {name: newName, age: 38},
+      {name: 'Patricia', age: 21}
+    ]})
+  }
+
+  nameChangedHandler = (event) => {
+    this.setState({persons: [
+      {name: 'Anna', age: 28},
+      {name: event.target.value, age: 89},
       {name: 'Patricia', age: 21}
     ]})
   }
@@ -35,7 +43,8 @@ class App extends Component {
          age={this.state.persons[0].age}>I like to paint and origami</Person>
          <Person 
          name="Ariel" 
-         age="41"/>
+         age="41"
+         changed={this.nameChangedHandler}/>
        </div>
      );
     // return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'Hi, I\'m a React App'))

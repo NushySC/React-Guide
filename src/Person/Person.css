@@ -1,0 +1,12 @@
+/* This is global css code */
+
+.Person {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 2em;
+    border: 0.2em solid #6e6e6e;
+    box-shadow: 0 0.2em 0.3em #8a8989;
+    padding:.8em;
+    text-align: center;
+    background-color: #e9e8e8;
+}
