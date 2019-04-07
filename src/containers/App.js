@@ -6,15 +6,38 @@ import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
-  state = {
-    persons: [
-      { id:'1', name: "Anna", age: 29},
-      { id:'2', name: "Alicia", age: 38},
-      { id:'3', name: 'Ariel', age: 41}
-    ],
-    otherState: 'whatever',
-    showPersons: false,
+  constructor(props) {
+    super(props);
+    console.log('[App.js] Inside Constructor', props)
+    this.state = {
+        persons: [
+          { id:'1', name: "Anna", age: 29},
+          { id:'2', name: "Alicia", age: 38},
+          { id:'3', name: 'Ariel', age: 41}
+        ],
+        otherState: 'whatever',
+        showPersons: false,
+    };
   }
+
+  componentWillMount() {
+    console.log('[App.js] Inside ComponentWilMount()')
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside ComponentDidMount()')
+  }
+
+  // Commentted out as it is now a part of the constructor. The state can now be set here , but initilizing it in the cosntructor is the old way to do it.
+  // state = {
+  //   persons: [
+  //     { id:'1', name: "Anna", age: 29},
+  //     { id:'2', name: "Alicia", age: 38},
+  //     { id:'3', name: 'Ariel', age: 41}
+  //   ],
+  //   otherState: 'whatever',
+  //   showPersons: false,
+  // }
 
   // swithcNameHandler = (newName) => {
   //   //console.log('Was clicked');
@@ -93,6 +116,7 @@ class App extends Component {
      return (
          <div className={classes.App}>
            <Cockpit 
+           appTitle={this.props.title}
            showPersons={this.state.showPersons}
            persons={this.state.persons}
            clicked={this.togglePersonsHandler}/>
