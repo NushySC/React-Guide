@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import classes from'./App.css';
 //import Radium, { StyleRoot } from 'radium';
-import Person from './Person/Person';
+// import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons'
+import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
   state = {
@@ -55,61 +57,45 @@ class App extends Component {
 
   render() {
 
-    const style = {
-      backgroundColor: 'green',
-      font: 'Helvetica',
-      color: 'white',
-      border: '0.3em solid black',
-      padding: '0.8em',
-      cursor: 'pointer',
-      marginBottom: '2em',
-      borderRadius: '0.5em',
+    // const style = {
+    //   backgroundColor: 'green',
+    //   font: 'Helvetica',
+    //   color: 'white',
+    //   border: '0.3em solid black',
+    //   padding: '0.8em',
+    //   cursor: 'pointer',
+    //   marginBottom: '2em',
+    //   borderRadius: '0.5em',
 
-      //radium properties, wrap in quotes because they start ith colon
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black',
-      }
+    //   //radium properties, wrap in quotes because they start ith colon
+    //   ':hover': {
+    //     backgroundColor: 'lightgreen',
+    //     color: 'black',
+    //   }
 
-    }
+    // }
 
     let persons = null;
 
     if (this.state.showPersons) {
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return <Person
-              click={() => this.deletePersonHandler(index)}
-              name={person.name} 
-              age={person.age}
-              key={person.id}
-              changed={(event) => this.nameChangedHandler(event, person.id)} />
-          })}
-        </div>
+          <Persons 
+          persons={this.state.persons}
+          clicked = {this.deletePersonHandler}
+          changed={this.nameChangedHandler}/>
       );
-          style.backgroundColor = 'blue';
-          style[':hover'] = {
-            backgroundColor: 'lightred',
-            color: 'black',
+          // style.backgroundColor = 'blue';
+          // style[':hover'] = {
+          //   backgroundColor: 'lightred',
+          //   color: 'black',
           }
-    }
-
-    const assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red);
-    } if (this.state.persons.lenght <= 1) {
-      assignedClasses.push(classes.bold);
-    };
 
      return (
-
          <div className={classes.App}>
-           <h1> Hi, I am a React App</h1>
-           <p className={assignedClasses.join(' ')}>It's working!</p>
-           <button 
-           style={style}
-           onClick={this.togglePersonsHandler}> Toggle persons</button>
+           <Cockpit 
+           showPersons={this.state.showPersons}
+           persons={this.state.persons}
+           clicked={this.togglePersonsHandler}/>
             {persons}
          </div>
      );
@@ -118,5 +104,5 @@ class App extends Component {
   }
 }
 
-//Componetn wrapping a component
+//Component wrapping a component
 export default App;

@@ -1,7 +1,7 @@
 /* This is global css code */
 
 .Person {
-    width: 60%;
+    width: 80%;
     margin: auto;
     margin-bottom: 2em;
     border: 0.2em solid #6e6e6e;
@@ -11,8 +11,14 @@
     background-color: #e9e8e8;
 }
 
-/* @media (min-width: 500px) {
+@media (min-width: 400px) {
     .Person {
         width: 450px;
     }
-} */
+}
+
+.Person .Delete {
+    background-color: red;
+    color: white;
+    padding: 0.5em;
+}
