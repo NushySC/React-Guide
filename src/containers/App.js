@@ -1,31 +1,35 @@
-import React, { Component } from 'react';
-import classes from'./App.css';
 //import Radium, { StyleRoot } from 'radium';
 // import Person from '../components/Persons/Person/Person';
-import Persons from '../components/Persons/Persons'
-import Cockpit from '../components/Cockpit/Cockpit'
+import React, { PureComponent } from 'react';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    console.log('[App.js] Inside Constructor', props)
+import classes from './App.css';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
+import Aux from '../hoc/Aux';
+import withClass from '../hoc/withClass';
+
+class App extends PureComponent {
+  constructor( props ) {
+    super( props );
+    console.log( '[App.js] Inside Constructor', props );
     this.state = {
-        persons: [
-          { id:'1', name: "Anna", age: 29},
-          { id:'2', name: "Alicia", age: 38},
-          { id:'3', name: 'Ariel', age: 41}
-        ],
-        otherState: 'whatever',
-        showPersons: false,
+      persons: [
+        { id: '1', name: 'Anna', age: 28 },
+        { id: '2', name: 'Alicia', age: 29 },
+        { id: '3', name: 'Ariel', age: 26 }
+      ],
+      otherState: 'some other value',
+      showPersons: false,
+      toggleClicked: 0
     };
   }
 
-  componentWillMount() {
-    console.log('[App.js] Inside ComponentWilMount()')
+  componentWillMount () {
+    console.log( '[App.js] Inside componentWillMount()' );
   }
 
-  componentDidMount() {
-    console.log('[App.js] Inside ComponentDidMount()')
+  componentDidMount () {
+    console.log( '[App.js] Inside componentDidMount()' );
   }
 
   // Commentted out as it is now a part of the constructor. The state can now be set here , but initilizing it in the cosntructor is the old way to do it.
@@ -75,10 +79,13 @@ class App extends Component {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState( { showPersons: !doesShow } );
+    this.setState( (prevState, props) => { 
+      return {
+        showPersons: !doesShow, 
+      toggleClicked: this.state.toggleClicked + 1 
+      }
+    } );
   }
-
-  render() {
 
     // const style = {
     //   backgroundColor: 'green',
@@ -98,35 +105,30 @@ class App extends Component {
 
     // }
 
+  render () {
+    console.log( '[App.js] Inside render()' );
     let persons = null;
 
-    if (this.state.showPersons) {
-      persons = (
-          <Persons 
+    if ( this.state.showPersons ) {
+      persons = <Persons
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangedHandler} />;
+    }
+
+    return (
+      <Aux>
+        <button onClick={() => { this.setState( { showPersons: true } ) }}>Show People</button>
+        <Cockpit
+          appTitle={this.props.title}
+          showPersons={this.state.showPersons}
           persons={this.state.persons}
-          clicked = {this.deletePersonHandler}
-          changed={this.nameChangedHandler}/>
-      );
-          // style.backgroundColor = 'blue';
-          // style[':hover'] = {
-          //   backgroundColor: 'lightred',
-          //   color: 'black',
-          }
-
-     return (
-         <div className={classes.App}>
-           <Cockpit 
-           appTitle={this.props.title}
-           showPersons={this.state.showPersons}
-           persons={this.state.persons}
-           clicked={this.togglePersonsHandler}/>
-            {persons}
-         </div>
-     );
-
-    // return React.createElement('div', null, React.createElement('h1', {className: 'App'}, 'Hi, I\'m a React App'))
+          clicked={this.togglePersonsHandler} />
+        {persons}
+      </Aux>
+    );
+    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
-//Component wrapping a component
-export default App;
+export default withClass( App, classes.App );
